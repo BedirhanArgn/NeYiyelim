@@ -1,0 +1,135 @@
+﻿@model Neyiyelim.ViewModel.restorantSehir
+@{
+    ViewBag.Title = "Index";
+        int a = 0;
+        string[] temp=null; 
+}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="receipe-slider owl-carousel owl-loaded owl-drag">
+         <div class="owl-stage-outer" s">
+                        <div class="owl-item cloned" style="width: 690px;height:400px;">
+                        <img src="https://imgrosetta.mynet.com.tr/file/84339/728xauto.jpg" alt="" >
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            </div>
+       </div>
+<div class="receipe-content-area">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <div class="receipe-headline my-5">
+                    @foreach (var item in Model.receipts)
+                    {
+                        <span>@item.ReceiptTarih.ToLongDateString()</span>
+                        <h2>@item.ReceiptName</h2>
+
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <!-- Single Preparation Step -->
+            
+
+                @{
+                    foreach (var item in Model.receipts)
+                    {
+                        temp = item.ReceiptInfo.Split('.');
+                    }
+
+                }
+
+                @foreach (var item in Model.receipts)
+                {
+                    for (int i = 1; i <temp.Length-1; i++)
+                    {
+                        <div class="single-preparation-step d-flex">
+                            <h4>@i</h4>
+                            <p>@temp[i-1].</p>
+                        </div>
+
+                    }
+
+
+                }
+            </div>
+
+            <!-- Ingredients -->
+            <div class="col-12 col-lg-4">
+                <div class="ingredients">
+                    <h4>MALZEMELER</h4>
+
+                    @{
+                        foreach (var item in Model.receipts)
+                        {
+                            temp = item.ReceiptIntegredients.Split('\n');
+                        }
+
+                    }
+
+                    @foreach (var item in Model.receipts)
+                                {
+                                    for (int i = 0; i < temp.Length - 1; i++)
+                                    {
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck4" checked="checked">
+                                <label class="custom-control-label" for="customCheck4">@temp[i]</label>
+                            </div>
+
+                        }
+
+
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-left">
+                    <h3>Leave a comment</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area">
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <input type="text" class="form-control" id="name" placeholder="Name">
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <input type="email" class="form-control" id="email" placeholder="E-mail">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control" id="subject" placeholder="Subject">
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn delicious-btn mt-30" type="submit">Post Comments</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
