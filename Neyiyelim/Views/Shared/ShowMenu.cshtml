@@ -17,13 +17,29 @@
 
             <!-- Top Social Info -->
             <div class="col-12 col-sm-6">
-                <div class="top-social-info text-right">
-                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                <div class="text-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <label>Hoşgeldiniz @User.Identity.Name</label>
+                        @Html.ActionLink("Çıkış", "Logout", "Account", null, new { @class = "btn btn-outline-danger", @style = "color:red;margin-left:5%;" })
+
+                    }
+                    else
+                    {
+
+                        @Html.ActionLink("Giriş", "Login", "Account", null, new { @class = "btn btn-outline-success", @style = "color:green;" })
+                        @Html.ActionLink("Kayıt", "Register", "Account", null, new { @class = "btn btn-outline-success", @style = "color:green;margin-left:3%;" })
+
+                    }
+                    @if(User.IsInRole("Admin"))
+                    { 
+                        @Html.ActionLink("Yönetici Paneli","Index","Admin",null, new { @class = "btn btn-outline-success", @style = "color:green;margin-left:2%;" })
+
+
+                    }
+
+
                 </div>
             </div>
         </div>

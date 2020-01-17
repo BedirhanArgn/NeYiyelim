@@ -8,18 +8,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Neyiyelim.Controllers
 {
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> usermanager;
-
+        private RoleManager<IdentityRole> roleManager;
 
         public AccountController()
         {
             var userstore = new UserStore<ApplicationUser>(new IdentityDataContext());
             usermanager = new UserManager<ApplicationUser>(userstore);
+            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new IdentityDataContext()));
+
         }
 
         public ActionResult Index()
@@ -34,7 +37,7 @@ namespace Neyiyelim.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]  //Sql açıklarından korunmak için
+        [ValidateAntiForgeryToken]  
         public ActionResult Register(Register model)
         {
             if (ModelState.IsValid)
@@ -45,9 +48,13 @@ namespace Neyiyelim.Controllers
                 user.PhoneNumber = model.Telefon;
 
                 var result = usermanager.Create(user, model.Password);
-
                 if (result.Succeeded)
                 {
+                    if (roleManager.RoleExists("User"))
+                    {
+
+                        usermanager.AddToRole(user.Id, "User");
+                    }
                     return RedirectToAction("Login");
                 }
                 else
@@ -58,8 +65,6 @@ namespace Neyiyelim.Controllers
                     }
                 }
             }
-
-
             return View();
         }
 
@@ -76,6 +81,7 @@ namespace Neyiyelim.Controllers
             if (ModelState.IsValid)
             {
                 var user = usermanager.Find(model.Username, model.Password);
+
                 if (user == null)
                 {
 
@@ -83,24 +89,55 @@ namespace Neyiyelim.Controllers
                 }
                 else
                 {
-                    var authmanager = HttpContext.GetOwinContext().Authentication; //Çerez bırakma işlemi için gereklidir.
-                    var identity = usermanager.CreateIdentity(user, "ApplicationCookie");
 
-                    var authproperties = new AuthenticationProperties()  //Burada beni hatırla gibi cooki'nin kalıcı olmasını sağlayabilirsiniz.
+                    if (usermanager.IsInRole(user.Id, "Admin"))
                     {
-                        IsPersistent = false  //beni hatırla kapalı
+                        var authmanager = HttpContext.GetOwinContext().Authentication; //Çerez bırakma işlemi için gereklidir.
+                        var identity = usermanager.CreateIdentity(user, "ApplicationCookie");
 
-                    };
+                        var authproperties = new AuthenticationProperties()  //Burada beni hatırla gibi cooki'nin kalıcı olmasını sağlayabilirsiniz.
+                        {
+                            IsPersistent = false  //beni hatırla kapalı
 
-                    authmanager.SignOut();
-                    authmanager.SignIn(authproperties, identity);
+                        };
 
-                    return Redirect("/");
+                        authmanager.SignOut();
+                        authmanager.SignIn(authproperties, identity);
+                        return RedirectToAction("Index", "Home");
 
+
+                    }
+                    else
+                    {
+                        var authmanager = HttpContext.GetOwinContext().Authentication; //Çerez bırakma işlemi için gereklidir.
+                        var identity = usermanager.CreateIdentity(user, "ApplicationCookie");
+
+                        var authproperties = new AuthenticationProperties()  //Burada beni hatırla gibi cooki'nin kalıcı olmasını sağlayabilirsiniz.
+                        {
+                            IsPersistent = false  //beni hatırla kapalı
+
+                        };
+
+                        authmanager.SignOut();
+                        authmanager.SignIn(authproperties, identity);
+
+                        return Redirect("/");
+                    }
                 }
             }
             return RedirectToAction("Login");
-                
+
+        }
+
+
+        public ActionResult Logout()
+        {
+
+            var authmanager = HttpContext.GetOwinContext().Authentication;
+            authmanager.SignOut();
+
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }
