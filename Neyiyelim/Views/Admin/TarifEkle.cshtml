@@ -1,0 +1,125 @@
+﻿@model Neyiyelim.Models.Receipts
+@{
+    Layout = null;
+    var kategoriler = (List<Neyiyelim.Models.ReceiptCategory>)ViewBag.model;
+    
+   
+}
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <title>Sidebar 04</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Style/adminpage/css/style.css">
+</head>
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <h1><a href="index.html" class="logo">Admin Panel</a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a href=@Url.Action("TarifEkle", "Admin")><span class="fa fa-home mr-3"></span> Tarif Ekle</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-user mr-3"></span> Dashboard</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> Friends</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> Subcription</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Settings</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Information</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            @using (Html.BeginForm())
+            {
+
+
+                <div class="row p-4">
+                    <div class="col-md-3">
+                        <p>Kategori Seçiniz</p>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.ReceiptCategoryId,
+    kategoriler.Select(d => new SelectListItem()
+    {
+        Value = d.Id.ToString(),
+        Text = d.CategoryName.ToString()
+    }))
+
+                    </div>
+                </div>
+
+                <div class="row p-4 ">
+                    <div class="col-md-3">
+                        <p>Tarifin Adı</p>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.ReceiptName, new { @class = "form-control", @style = "background-color : #d1d1d1" })
+                    </div>
+                </div>
+                <div class="row p-4 ">
+                    <div class="col-md-3">
+                        <p>Tarifin İçeriği</p>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.ReceiptInfo, new { @class = "form-control", @style = "background-color : #d1d1d1" })
+                    </div>
+                </div>
+                <div class="row p-4 ">
+                    <div class="col-md-3">
+                        <p>Tarifin İçindekileri</p>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.ReceiptIntegredients, new { @class = "form-control", @style = "background-color : #d1d1d1" })
+                    </div>
+                </div>
+
+                <div class="row p-4 ">
+                    <div class="col-md-3">
+                        <p>Resim URL</p>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.ReceiptUrl, new { @class = "form-control", @style = "background-color : #cfcfcf" })
+                    </div>
+                </div>
+
+                <div class="row p-4 ">
+                    <button type="submit">Kaydet</button>
+
+                </div>
+
+            }
+        </div>
+       
+        </div>
+    
+            <script src="~/Style/adminpage/js/jquery.min.js"></script>
+            <script src="~/Style/adminpage/js/popper.js"></script>
+            <script src="~/Style/adminpage/js/bootstrap.min.js"></script>
+            <script src="~/Style/adminpage/js/main.js"></script>
+        </body>
+</html>
+

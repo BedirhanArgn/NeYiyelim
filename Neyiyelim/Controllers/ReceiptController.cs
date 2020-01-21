@@ -13,17 +13,22 @@ namespace Neyiyelim.Controllers
     public class ReceiptController : Controller
     {
         // GET: Receipt
-        restorantSehir rc = new restorantSehir();
-        RestorantContext context = new RestorantContext();
-        [HttpGet]
+        //restorantSehir rc = new restorantSehir();
+        RestorantContext context = new RestorantContext();[HttpGet]
         public ActionResult Index(string ad)
         {
-            rc.receipts = context.Receipts.ToList();
-          
-            return View(rc);
+            var deger = context.Receipts.Where(i => i.ReceiptName == ad).FirstOrDefault();
+
+            return View(deger);
         }
 
+        //[HttpPost]
+        //public ActionResult Index(string ad)
+        //{
+        //    var deger = context.Receipts.Where(i => i.ReceiptName == ad).FirstOrDefault();
 
+        //    return View(deger);
+        //}
 
     }
-     }
+}

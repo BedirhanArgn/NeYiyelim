@@ -17,6 +17,7 @@ namespace Neyiyelim.Controllers
         
         public ActionResult Index()
          {
+           // var items = context.Receipts.ToList();
          
             return View();
           

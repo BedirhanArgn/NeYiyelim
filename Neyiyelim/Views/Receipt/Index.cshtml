@@ -1,35 +1,33 @@
-﻿@model Neyiyelim.ViewModel.restorantSehir
+﻿@model Neyiyelim.Models.Receipts
 @{
     ViewBag.Title = "Index";
-        int a = 0;
-        string[] temp=null; 
+    int a = 0;
+    string[] temp = null;
 }
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="receipe-slider owl-carousel owl-loaded owl-drag">
-         <div class="owl-stage-outer" s">
-                        <div class="owl-item cloned" style="width: 690px;height:400px;">
-                        <img src="https://imgrosetta.mynet.com.tr/file/84339/728xauto.jpg" alt="" >
-                        </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="receipe-slider owl-carousel owl-loaded owl-drag">
+                <div class="owl-stage-outer" s">
+                    <div class="owl-item cloned" style="width: 690px;height:400px;">
+                        <img src="@Model.ReceiptUrl" alt="">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-            </div>
-       </div>
+</div>
 <div class="receipe-content-area">
     <div class="container">
 
         <div class="row">
             <div class="col-12 col-md-8">
                 <div class="receipe-headline my-5">
-                    @foreach (var item in Model.receipts)
-                    {
-                        <span>@item.ReceiptTarih.ToLongDateString()</span>
-                        <h2>@item.ReceiptName</h2>
+                   
+                        <span>@Model.ReceiptTarih.ToLongDateString()</span>
+                        <h2>@Model.ReceiptName</h2>
 
-                    }
+                   
 
                 </div>
             </div>
@@ -39,29 +37,26 @@
         <div class="row">
             <div class="col-12 col-lg-8">
                 <!-- Single Preparation Step -->
-            
+
 
                 @{
-                    foreach (var item in Model.receipts)
-                    {
-                        temp = item.ReceiptInfo.Split('.');
-                    }
+                       temp = Model.ReceiptInfo.Split('.');
+                    
 
                 }
 
-                @foreach (var item in Model.receipts)
-                {
-                    for (int i = 1; i <temp.Length-1; i++)
+               
+                    @for (int i = 1; i < temp.Length - 1; i++)
                     {
                         <div class="single-preparation-step d-flex">
                             <h4>@i</h4>
-                            <p>@temp[i-1].</p>
+                            <p>@temp[i - 1].</p>
                         </div>
 
                     }
 
 
-                }
+                
             </div>
 
             <!-- Ingredients -->
@@ -70,26 +65,23 @@
                     <h4>MALZEMELER</h4>
 
                     @{
-                        foreach (var item in Model.receipts)
-                        {
-                            temp = item.ReceiptIntegredients.Split('\n');
-                        }
 
-                    }
-
-                    @foreach (var item in Model.receipts)
-                                {
-                                    for (int i = 0; i < temp.Length - 1; i++)
-                                    {
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck4" checked="checked">
-                                <label class="custom-control-label" for="customCheck4">@temp[i]</label>
-                            </div>
-
-                        }
+                        temp = Model.ReceiptIntegredients.Split('\n');
 
 
                     }
+
+                    @for (int i = 0; i < temp.Length; i++)
+                    {
+
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck4" checked="checked">
+                            <label class="custom-control-label" for="customCheck4">@temp[i]</label>
+                        </div>
+
+                    }
+
 
 
 

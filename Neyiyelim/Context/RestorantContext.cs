@@ -14,7 +14,7 @@ namespace Neyiyelim.Context
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<RestorantContext>());
         }
-        public  DbSet<Restorant> Restorants { get; set; }
+        public DbSet<Restorant> Restorants { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Receipts> Receipts { get; set; }
         public DbSet<ReceiptCategory> receiptCategories { get; set; }

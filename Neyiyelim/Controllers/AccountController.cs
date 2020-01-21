@@ -110,7 +110,7 @@ namespace Neyiyelim.Controllers
                     else
                     {
                         var authmanager = HttpContext.GetOwinContext().Authentication; //Çerez bırakma işlemi için gereklidir.
-                        var identity = usermanager.CreateIdentity(user, "ApplicationCookie");
+                         var identity = usermanager.CreateIdentity(user, "ApplicationCookie");
 
                         var authproperties = new AuthenticationProperties()  //Burada beni hatırla gibi cooki'nin kalıcı olmasını sağlayabilirsiniz.
                         {
