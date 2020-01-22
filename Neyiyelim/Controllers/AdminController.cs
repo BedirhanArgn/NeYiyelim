@@ -29,7 +29,7 @@ namespace Neyiyelim.Controllers {
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult TarifEkle()
         {
@@ -52,5 +52,26 @@ namespace Neyiyelim.Controllers {
             context.SaveChanges();
             return View();
         }
+        [HttpGet]
+        public ActionResult KategoriEkle()
+        {
+            return View(new ReceiptCategory());
+        }
+        [HttpPost] 
+        public ActionResult KategoriEkle(ReceiptCategory rc)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.control = "control";
+                ReceiptCategory rccat = new ReceiptCategory();
+                rccat.CategoryName = rc.CategoryName;
+                context.receiptCategories.Add(rccat);
+                context.SaveChanges();
+
+                return View();
+
+            }
+            return View();
+            }
     }
 }

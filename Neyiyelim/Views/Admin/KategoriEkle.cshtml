@@ -1,8 +1,7 @@
-﻿
+﻿@model Neyiyelim.Models.ReceiptCategory
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -16,7 +15,16 @@
     <link rel="stylesheet" href="~/Style/adminpage/css/style.css">
 </head>
 <body>
+    @{ 
 
+        if(ViewBag.control!=null)
+        {
+            <script>
+                alert("Kayıt Başarılı")
+            </script>
+        }
+
+    }
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">
@@ -49,9 +57,20 @@
         </nav>
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
-            <h2 class="mb-4">Sidebar #04</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            @using (Html.BeginForm())
+            {
+                <div class="row pl-4">
+
+                    <p class="mt-1">Kategori adı</p>
+
+                    <div class="col-4">
+                        @Html.TextBoxFor(i => i.CategoryName, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
+
+                    </div>
+
+                </div>
+                <button type="submit">Kaydet</button>
+            }
         </div>
     </div>
     <script src="~/Style/adminpage/js/jquery.min.js"></script>
