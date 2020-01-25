@@ -72,6 +72,29 @@ namespace Neyiyelim.Controllers {
 
             }
             return View();
-            }
+       }
+        [HttpGet]
+        public ActionResult IndexPage()
+        {
+
+            return View(new IndexPage());
+
+        }
+        [HttpPost]
+       public ActionResult IndexPage(IndexPage ip)
+       {
+            IndexPage indexpage = new IndexPage();
+            indexpage.anasayfabaslik = ip.anasayfabaslik;
+            indexpage.anasayfaicerik = ip.anasayfaicerik;
+            indexpage.anasayfaresimUrl = ip.anasayfaresimUrl;
+            indexpage.receipicerik = ip.receipicerik;
+            indexpage.receiptbaslik = ip.receiptbaslik;
+            indexpage.receiptfoto = ip.receiptfoto;
+            indexpage.ReceiptIntegredients = ip.ReceiptIntegredients;
+            context.IndexPages.Where(i => i.Id == ip.Id-1);
+            context.SaveChanges();
+            
+            return View();
+       }
     }
 }

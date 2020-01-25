@@ -3,7 +3,6 @@
     Layout = null;
     var kategoriler = (List<Neyiyelim.Models.ReceiptCategory>)ViewBag.model;
     
-   
 }
 
 <!DOCTYPE html>
@@ -31,14 +30,14 @@
             </div>
             <h1><a href="index.html" class="logo">Admin Panel</a></h1>
             <ul class="list-unstyled components mb-5">
-                <li class="active">
+                <li>
                     <a href=@Url.Action("TarifEkle", "Admin")><span class="fa fa-home mr-3"></span> Tarif Ekle</a>
                 </li>
                 <li>
                     <a href=@Url.Action("KategoriEkle", "Admin")><span class="fa fa-user mr-3"></span> Kategori Ekle</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-sticky-note mr-3"></span> Friends</a>
+                    <a href=@Url.Action("IndexPage","Admin")><span class="fa fa-sticky-note mr-3"></span>Index Düzenle</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-sticky-note mr-3"></span> Subcription</a>

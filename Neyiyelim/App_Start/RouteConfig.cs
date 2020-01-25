@@ -18,6 +18,9 @@ namespace Neyiyelim
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute("Default2",
+                "{controller}/{action}/{id}",
+                new { controller = "Receipt", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

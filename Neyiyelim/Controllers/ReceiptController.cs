@@ -14,7 +14,8 @@ namespace Neyiyelim.Controllers
     {
         // GET: Receipt
         //restorantSehir rc = new restorantSehir();
-        RestorantContext context = new RestorantContext();[HttpGet]
+        RestorantContext context = new RestorantContext();
+        [HttpGet]
         public ActionResult Index(string ad)
         {
             var deger = context.Receipts.Where(i => i.ReceiptName == ad).FirstOrDefault();

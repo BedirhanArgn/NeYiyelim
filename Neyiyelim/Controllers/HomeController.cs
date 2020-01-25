@@ -17,9 +17,9 @@ namespace Neyiyelim.Controllers
         
         public ActionResult Index()
          {
-           // var items = context.Receipts.ToList();
+         var items = context.IndexPages.FirstOrDefault();
          
-            return View();
+            return View(items);
           
         }
         public PartialViewResult ShowMenu()

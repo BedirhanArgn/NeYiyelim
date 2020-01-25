@@ -1,30 +1,18 @@
-﻿@model Neyiyelim.Models.ReceiptCategory
+﻿@model Neyiyelim.Models.IndexPage
 @{
     Layout = null;
 }
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <title>Sidebar 04</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Style/adminpage/css/style.css">
+    <title>IndexPage</title>
 </head>
 <body>
-    @{ 
-
-        if(ViewBag.control!=null)
-        {
-            <script>
-                alert("Kayıt Başarılı")
-            </script>
-        }
-
-    }
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">
@@ -61,10 +49,68 @@
             {
                 <div class="row pl-4">
 
-                    <p class="mt-1">Kategori adı</p>
+                    <p class="mt-1">Ana sayfa başlık adı</p>
 
                     <div class="col-4">
-                        @Html.TextBoxFor(i => i.CategoryName, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
+                        @Html.TextBoxFor(i => i.anasayfabaslik, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
+
+                    </div>
+
+                </div>
+                <div class="row pl-4">
+
+                    <p class="mt-1">Ana sayfa içerik</p>
+
+                    <div class="col-4">
+                        @Html.TextBoxFor(i => i.anasayfaicerik, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
+
+                    </div>
+
+                </div>
+                <div class="row pl-4">
+
+                    <p class="mt-1">Ana sayfa Resim URl</p>
+
+                    <div class="col-4">
+                        @Html.TextBoxFor(i => i.anasayfaresimUrl, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
+
+                    </div>
+
+                </div>
+                <div class="row pl-4">
+
+                    <p class="mt-1">Tarif adi</p>
+
+                    <div class="col-4">
+                        @Html.TextBoxFor(i => i.receiptbaslik, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
+
+                    </div>
+
+                </div>
+                <div class="row p-4 ">
+                    <div class="col-md-3">
+                        <p>Tarifin İçindekileri</p>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.ReceiptIntegredients, new { @class = "form-control", @style = "background-color : #d1d1d1" })
+                    </div>
+                </div>
+                <div class="row pl-4">
+
+                    <p class="mt-1">Tarif icerik</p>
+
+                    <div class="col-4">
+                        @Html.TextBoxFor(i => i.receipicerik, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
+
+                    </div>
+
+                </div>
+                <div class="row pl-4">
+
+                    <p class="mt-1">Tarif Resim Url</p>
+
+                    <div class="col-4">
+                        @Html.TextBoxFor(i => i.receiptfoto, new { @class = "form-control pl-3", @style = "background-color : #d1d1d1" })
 
                     </div>
 

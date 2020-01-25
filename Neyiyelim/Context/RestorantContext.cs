@@ -18,8 +18,9 @@ namespace Neyiyelim.Context
         public DbSet<City> Cities { get; set; }
         public DbSet<Receipts> Receipts { get; set; }
         public DbSet<ReceiptCategory> receiptCategories { get; set; }
+        public DbSet<IndexPage> IndexPages { get; set; }
 
     }
 
-      
+
 }
